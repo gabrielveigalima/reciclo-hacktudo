@@ -2,10 +2,10 @@
 -- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 29-Jul-2018 às 07:51
+-- Host: localhost
+-- Generation Time: 03-Nov-2018 às 12:49
 -- Versão do servidor: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -77,12 +77,24 @@ CREATE TABLE `residuos` (
   `nome_r` varchar(255) NOT NULL,
   `categoria_id` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL,
-  `dias_disponiveis` varchar(255) NOT NULL,
-  `endereco_id` int(11) NOT NULL,
-  `data_criacao` date NOT NULL,
+  `dias_disponiveis` date NOT NULL,
+  `cep` varchar(20) NOT NULL,
+  `data_criacao` datetime NOT NULL,
   `id_owner` int(10) NOT NULL,
   `id_empresa` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `residuos`
+--
+
+INSERT INTO `residuos` (`id`, `nome_r`, `categoria_id`, `quantidade`, `dias_disponiveis`, `cep`, `data_criacao`, `id_owner`, `id_empresa`) VALUES
+(1, 't', 0, 0, '0000-00-00', '$cep', '0000-00-00 00:00:00', 0, NULL),
+(2, 't', 8, 4, '2018-11-13', '25561-09', '0000-00-00 00:00:00', 13, NULL),
+(3, 't', 8, 4, '2018-11-13', '25561-09', '2018-11-03 05:00:18', 13, NULL),
+(4, 'latinha', 1, 5, '2018-11-20', '25535-020', '2018-11-03 05:07:30', 13, NULL),
+(5, 'latinha', 1, 5, '2018-11-20', '25535-020', '2018-11-03 05:25:24', 13, NULL),
+(6, 'latinha', 1, 5, '2018-11-20', '25535-020', '2018-11-03 05:25:48', 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -107,7 +119,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `nivel_id`, `tipo_conta`, `tel_1`, `tel_2`, `qnt_pontos`) VALUES
-(3, 'mario', 'sl4ureano@live.com', '123213', 1, 'pf', 344343553, 434345455, 4000),
+(3, 'mario', 'sl4ureano@live.com', '1', 1, 'pf', 344343553, 434345455, 4000),
 (4, 'Celso Inácio', 'celso@a.com', '123', 1, 'pf', NULL, NULL, 999),
 (5, 'celso', 'cels2o@a.com', '123', 1, 'pf', NULL, NULL, 0),
 (6, 'celso', 'celsaaao@a.com', '123', 1, 'pf', NULL, NULL, 0),
@@ -116,7 +128,8 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `nivel_id`, `tipo_conta`
 (9, 'SAUSHAUS', 'HUSAHUSHAU', 'HSAUHSAUHSAU', 1, 'pf', NULL, NULL, 0),
 (10, 'sasa', 'asasa', 'sasasa', 1, 'pf', NULL, NULL, 0),
 (11, 'celso', 'celso', 'celso', 1, 'pf', NULL, NULL, 0),
-(12, 'sasasa', 'sasasa@aaa.com', '123', 1, 'pf', NULL, NULL, 0);
+(12, 'sasasa', 'sasasa@aaa.com', '123', 1, 'pf', NULL, NULL, 0),
+(13, 'Gabriel', 'gabrielveigalima@icloud.com', '123', 1, 'pf', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -166,13 +179,13 @@ ALTER TABLE `empresa_parceira`
 -- AUTO_INCREMENT for table `residuos`
 --
 ALTER TABLE `residuos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
