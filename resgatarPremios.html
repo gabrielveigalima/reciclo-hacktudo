@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Avud">
+    <link rel="icon" href="img/faviconLogo.ico">
+    
+
+    <title>Reciclo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+
+  </head>
+
+  <body class="text-center" style="background-color: #CCC;">
+       <nav class="navbar-fixed-top navbar navbar-default " style="margin-bottom:0px !important;">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img style="margin-top: -20px;" height="50px" class="img-reponsive" src="img/logo.png"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="novoProduto.html">Anunciar Resíduos</a></li>
+            <li><a href="resgatarPremios.html">Resgatar Prêmios</a></li>
+          </ul>
+                    
+          <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Minha Conta <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="meuPerfil.html">Meu Perfil</a></li>
+                        <li><a href="meusDados.html">Meus Dados</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="" id="sair">Sair</a></li>
+                     </ul>
+                  </li>
+               </ul>
+         </nav>  
+
+
+      <div class="container-fluid" style="margin-top: 100px;">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="col-md-2" style="margin-bottom: 10px;margin-right: 10px;background-color:#FFF;padding:20px;">
+                <div class="col-md-4" style="margin-top:9px;background-color: black; width: 80px; height: 80px; border-radius: 100px;"> 
+                  <span style="font-size: 65px; color: #fff; font-weight: bold;">Y</span>
+                </div>
+                  <p>Netflix</p>
+                  <p>500 pontos</p>
+                  <button class="btn btn-success">Resgatar</button>
+              </div>
+              
+              <div class="col-md-2" style="margin-bottom: 10px;margin-right: 10px;background-color:#FFF;padding:20px;">
+                  <div class="col-md-4" style="margin-top:9px;background-color: black; width: 80px; height: 80px; border-radius: 100px;"> 
+                    <span style="font-size: 65px; color: #fff; font-weight: bold;">Y</span>
+                  </div>
+                    <p>Netflix</p>
+                    <p>500 pontos</p>
+                    <button class="btn btn-success">Resgatar</button>
+                </div>
+
+                <div class="col-md-2" style="margin-bottom: 10px;margin-right: 10px;background-color:#FFF;padding:20px;">
+                    <div class="col-md-4" style="margin-top:9px;background-color: black; width: 80px; height: 80px; border-radius: 100px;"> 
+                      <span style="font-size: 65px; color: #fff; font-weight: bold;">Y</span>
+                    </div>
+                      <p>Netflix</p>
+                      <p>500 pontos</p>
+                      <button class="btn btn-success">Resgatar</button>
+                  </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+$("#sair").click(function(){
+            $.get("/hackingrio-olx-avud-hacking/api/ws.php?getAct=2", function(data, status){
+            response = data;
+            var json = response;
+            obj = JSON.parse(json);
+            console.log(obj);
+            window.location.href ="login.html";
+            });
+              });
+      </script>
+  </body>
+</html>
+</body>
+</html>

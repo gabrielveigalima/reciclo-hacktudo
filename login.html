@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Avud">
+    <link rel="icon" href="img/faviconLogo.ico">
+
+    <title>Reciclo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <nav class="navbar-fixed-top navbar navbar-default " style="margin-bottom:0px !important;">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img style="margin-top: -20px;" height="50px" class="img-reponsive" src="img/logo.png"></a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="parceira.html">Torne-se uma Empresa Parceira</a></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+          <li><a href="login.html">Acesse sua Conta</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="col-md-12" id="divLogin">
+      <form class="form-signin"  style="background-color: #fff;border-radius:15px;">
+        <img src="img/logoApresentacao.png" height="100px">
+      <img class="mb-4" src="#" alt="" width="72" height="72">
+      <div class="alert alert-danger" id="erroLogin" role="alert">
+          Login ou senha incorretos
+        </div>
+      <label for="inputEmail" class="sr-only">Email</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Digite seu email" required autofocus>
+      <label for="inputPassword" class="sr-only">Senha</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Digite sua senha" required>
+      <button class="btn btn-lg backgroundVerde btn-block" id="submitLogin" type="submit">Entrar</button>
+
+      <p style="padding-top:10px;">Ainda não é membro? <a href="#" id="btCadastro">Cadastre-se</a></p>
+
+      <p class="mt-5 mb-3 text-muted" style="padding-top: 15px;">Reciclo &copy; 2018</p>
+      </form>
+      </div>
+
+    <div class="col-md-12" id="divCadastro">
+
+        <form class="form-signin" method="post" action="cadCliente.php" style="background-color: #fff;border-radius:15px;">
+            <img src="img/logoApresentacao.png" height="100px">
+            <div class="alert alert-danger" id="erroSenhas" role="alert">
+                As senhas não coincidem
+              </div>
+          <img class="mb-4" src="#" alt="" width="72" height="72">
+          <input type="text" name="nome" id="inputNomeCad" style="margin-bottom:-1px;" class="form-control" placeholder="Digite seu nome" required autofocus>
+          <input type="email" name="" id="inputEmailCadastro" style="margin-bottom:-1px;" class="form-control" placeholder="Digite seu email" required autofocus>
+          <input type="password" name="" id="inputPasswordCad" style="margin-bottom:-1px;" class="form-control" placeholder="Digite sua senha" required autofocus>
+          <input type="password" name="" id="inputPasswordCad2" style="margin-bottom:-1px;" class="form-control " placeholder="Confirme sua senha" required autofocus>
+
+          <div class="checkbox mb-3">
+          </div>
+          <button class="btn btn-lg backgroundVerde btn-block" id="submitCadastro" type="submit">Cadastrar</button>
+
+          <p class="mt-5 mb-3 text-muted" style="padding-top: 15px;">Reciclo &copy; 2018</p>
+          </form>
+    </div>
+  </div>
+
+</div>
+
+    </form>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $("#divCadastro").hide();
+      $("#erroLogin").hide();
+
+      $(".form-signin").submit(function(e){
+          return false;
+      });
+
+      $("#btCadastro").click(function(){
+        $("#divLogin").hide("slow");
+        $("#divCadastro").show("slow");
+      });
+
+      $("#submitLogin").click(function() {
+        var email = $("#inputEmail").val();
+        var senha = $("#inputPassword").val();
+        $.get("api/ws.php?getAct=1&email=" + email + "&senha="+ senha, function(data, status){
+        //console.log("Data: " + data + "\nStatus: " + status);
+        //console.log("api/ws.php?email=" + email + "&senha="+ senha)
+        response = data;
+        var json = response,
+        obj = JSON.parse(json);
+        console.log(obj);
+        if(obj.status == "true"){
+          console.log("Logado com sucesso");
+          if(obj.tipo == "pf"){
+            window.location.href = "./meuPerfil.html";
+          }
+        }else{
+          console.log("Login ou senha incorretos");
+          $("#erroLogin").show("slow");
+        }
+        });
+      });
+
+    $("#erroSenhas").hide();
+
+    $("#submitCadastro").click(function() {
+        var nome = $("#inputNomeCad").val();
+        var email = $("#inputEmailCadastro").val();
+        var senha = $("#inputPasswordCad").val();
+        var senha2 = $("#inputPasswordCad2").val();
+
+        if(senha == senha2){
+        $.post("/HACKTUDO/api/ws.php",
+        {
+            postAct: 1,
+            email: email,
+            senha: senha,
+            nome: nome
+        },
+        function(data, status){
+            console.log("Data: " + data + "\nStatus: " + status);
+            obj = JSON.parse(data);
+            //console.log(obj.status);
+            if(obj.status == "ok"){
+              $.get("api/ws.php?getAct=1&email=" + email + "&senha="+ senha, function(data, status){
+              response = data;
+              var json = response,
+              obj = JSON.parse(json);
+              console.log(obj);
+              if(obj.status == "true"){
+                console.log("Logado com sucesso");
+                if(obj.tipo == "pf"){
+                  window.location.href = "./meuPerfil.html";
+                }
+              }else{
+                console.log("Login ou senha incorretos");
+                $("#erroLogin").show("slow");
+              }
+              });
+            }
+        });
+        }else{
+            $("#erroSenhas").show("slow");
+        }
+
+     });
+    </script>
+  </body>
+</html>
+  </body>
+</html>
